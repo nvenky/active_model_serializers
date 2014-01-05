@@ -57,10 +57,10 @@ module ActiveModel
     def to_json(*args)
       if perform_caching?
         cache.fetch expand_cache_key([self.class.to_s.underscore, cache_key, 'to-json']) do
-          super
+          ActiveSupport::JSON.encode(self, options)
         end
       else
-        super
+        ActiveSupport::JSON.encode(self, options)
       end
     end
 
@@ -102,3 +102,4 @@ module ActiveModel
     end
   end
 end
+
